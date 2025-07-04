@@ -49,5 +49,12 @@ public class CompetenceController {
     }
 
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCompetence(@PathVariable Long id) {
+        competenceService.deleteCompetence(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
 
 }
