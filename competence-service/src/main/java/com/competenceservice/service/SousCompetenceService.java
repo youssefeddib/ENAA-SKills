@@ -36,7 +36,18 @@ public class SousCompetenceService {
     }
 
 
+    public SousCompetence updateValidationStatus(Long id, boolean isValid) {
+        SousCompetence sc = sousCompetenceRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("SousCompétence introuvable avec id: " + id));
 
+        sc.setValide(isValid);
+        SousCompetence updated = sousCompetenceRepository.save(sc);
+
+
+        competenceService.updateCompetenceValidation(sc.getCompetence().getId());
+
+        return updated;
+    }
 
 
     public SousCompetence createSousCompetence(SousCompetence sc) {
