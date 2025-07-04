@@ -34,7 +34,13 @@ public class CompetenceService {
     }
 
 
-
+    public CompetenceDTO updateCompetence(Long id, CompetenceDTO competenceDTO) {
+        Competence competence = CompetenceMapper.toEntity(competenceDTO);
+        competence.setId(id);
+        competence.getSousCompetences().forEach(sc -> sc.setCompetence(competence));
+        Competence updated = competenceRepository.save(competence);
+        return CompetenceMapper.toDTO(updated);
+    }
 
 
     public Optional<CompetenceDTO> getCompetenceById(Long id) {
