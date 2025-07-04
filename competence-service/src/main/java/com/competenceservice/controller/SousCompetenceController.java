@@ -60,6 +60,14 @@ public class SousCompetenceController {
     }
 
 
+    @PutMapping("/{id}/validation")
+    public ResponseEntity<SousCompetenceDTO> updateValidationStatus(
+            @PathVariable Long id,
+            @RequestParam boolean isValid) {
+
+        SousCompetence updated = sousCompetenceService.updateValidationStatus(id, isValid);
+        return ResponseEntity.ok(SousCompetenceMapper.toDTO(updated));
+    }
 
 
     @DeleteMapping("/{id}")
