@@ -29,4 +29,32 @@ public class CompetenceService {
     }
 
 
+    public void deleteCompetence(Long id) {
+        competenceRepository.deleteById(id);
+    }
+
+
+
+
+
+    public Optional<CompetenceDTO> getCompetenceById(Long id) {
+        Optional<Competence> competenceOpt = competenceRepository.findById(id);
+        return competenceOpt.map(CompetenceMapper::toDTO);
+    }
+
+
+    public List<CompetenceDTO> getAllCompetences() {
+        return competenceRepository.findAll()
+                .stream()
+                .map(CompetenceMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    public Optional<Competence> getCompetenceEntityById(Long id) {
+        return competenceRepository.findById(id);
+    }
+
+
+
+
 }
