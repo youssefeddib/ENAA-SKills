@@ -27,4 +27,27 @@ public class CompetenceController {
     }
 
 
+    @GetMapping
+    public ResponseEntity<List<CompetenceDTO>> getAllCompetences() {
+        List<CompetenceDTO> list = competenceService.getAllCompetences();
+        return ResponseEntity.ok(list);
+    }
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CompetenceDTO> getCompetenceById(@PathVariable Long id) {
+        Optional<CompetenceDTO> competenceOpt = competenceService.getCompetenceById(id);
+        return competenceOpt.map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CompetenceDTO> updateCompetence(@PathVariable Long id, @RequestBody CompetenceDTO competenceDTO) {
+        CompetenceDTO updated = competenceService.updateCompetence(id, competenceDTO);
+        return ResponseEntity.ok(updated);
+    }
+
+
+
 }
