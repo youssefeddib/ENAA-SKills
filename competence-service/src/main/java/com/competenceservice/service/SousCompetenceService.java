@@ -59,5 +59,11 @@ public class SousCompetenceService {
     }
 
 
-
+    public void deleteSousCompetence(Long id) {
+        Optional<SousCompetence> sc = sousCompetenceRepository.findById(id);
+        sc.ifPresent(sousCompetence -> {
+            sousCompetenceRepository.deleteById(id);
+            competenceService.updateCompetenceValidation(sousCompetence.getCompetence().getId());
+        });
+    }
 }
