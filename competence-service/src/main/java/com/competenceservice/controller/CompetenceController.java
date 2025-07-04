@@ -56,5 +56,13 @@ public class CompetenceController {
     }
 
 
-
+    @PutMapping("/{id}/validation")
+    public ResponseEntity<CompetenceDTO> updateCompetenceValidation(@PathVariable Long id) {
+        CompetenceDTO updated = competenceService.updateCompetenceValidation(id);
+        if (updated != null) {
+            return ResponseEntity.ok(updated);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
