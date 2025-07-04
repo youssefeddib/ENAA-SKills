@@ -62,5 +62,16 @@ public class CompetenceService {
 
 
 
-
+    public CompetenceDTO updateCompetenceValidation(Long id) {
+        Optional<Competence> competenceOpt = competenceRepository.findById(id);
+        if (competenceOpt.isPresent()) {
+            Competence competence = competenceOpt.get();
+            boolean allValid = competence.getSousCompetences().stream()
+                    .allMatch(SousCompetence::isValide);
+            competence.setValide(allValid);
+            Competence saved = competenceRepository.save(competence);
+            return CompetenceMapper.toDTO(saved);
+        }
+        return null;
+    }
 }
