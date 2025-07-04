@@ -61,4 +61,10 @@ public class SousCompetenceController {
 
 
 
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteSousCompetence(@PathVariable Long id) {
+        sousCompetenceService.deleteSousCompetence(id);
+        return ResponseEntity.noContent().build();
+    }
 }
