@@ -4,6 +4,8 @@ import com.competenceservice.Mapper.SousCompetenceMapper;
 import com.competenceservice.dto.SousCompetenceDTO;
 import com.competenceservice.entity.SousCompetence;
 import com.competenceservice.service.SousCompetenceService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Tag(name = "Sous-Compétences", description = "Gestion des sous-compétences")
 @RestController
 @RequestMapping("/api/sous-competences")
 @CrossOrigin(origins = "*")
@@ -51,7 +54,7 @@ public class SousCompetenceController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-
+    @Operation(summary = "Ajouter une sous-compétence")
     @PostMapping
     public ResponseEntity<SousCompetenceDTO> createSousCompetence(@RequestBody SousCompetenceDTO dto) {
         SousCompetence entity = SousCompetenceMapper.toEntity(dto);

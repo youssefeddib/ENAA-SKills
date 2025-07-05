@@ -23,10 +23,16 @@ public class CompetenceService {
 
     public CompetenceDTO createCompetence(CompetenceDTO competenceDTO) {
         Competence competence = CompetenceMapper.toEntity(competenceDTO);
-        competence.getSousCompetences().forEach(sc -> sc.setCompetence(competence));
+
+
+        if (competence.getSousCompetences() != null) {
+            competence.getSousCompetences().forEach(sc -> sc.setCompetence(competence));
+        }
+
         Competence saved = competenceRepository.save(competence);
         return CompetenceMapper.toDTO(saved);
     }
+
 
 
     public void deleteCompetence(Long id) {

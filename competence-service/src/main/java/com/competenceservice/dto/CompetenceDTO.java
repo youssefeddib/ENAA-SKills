@@ -1,5 +1,6 @@
 package com.competenceservice.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CompetenceDTO {
@@ -7,8 +8,11 @@ public class CompetenceDTO {
     private Long id;
     private String nom;
     private boolean valide;
-    private List<SousCompetenceDTO> sousCompetences;
 
+    // تهيئة القائمة مباشرة لتجنّب NullPointerException
+    private List<SousCompetenceDTO> sousCompetences = new ArrayList<>();
+
+    // Constructors
     public CompetenceDTO() {
     }
 
@@ -16,9 +20,10 @@ public class CompetenceDTO {
         this.id = id;
         this.nom = nom;
         this.valide = valide;
-        this.sousCompetences = sousCompetences;
+        this.sousCompetences = sousCompetences != null ? sousCompetences : new ArrayList<>();
     }
 
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -48,6 +53,6 @@ public class CompetenceDTO {
     }
 
     public void setSousCompetences(List<SousCompetenceDTO> sousCompetences) {
-        this.sousCompetences = sousCompetences;
+        this.sousCompetences = sousCompetences != null ? sousCompetences : new ArrayList<>();
     }
 }

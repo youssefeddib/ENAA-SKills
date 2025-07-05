@@ -2,12 +2,15 @@ package com.competenceservice.controller;
 
 import com.competenceservice.dto.CompetenceDTO;
 import com.competenceservice.service.CompetenceService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
+@Tag(name = "Competences", description = "Endpoints gestion des compétences")
 @RestController
 @RequestMapping("/api/competences")
 @CrossOrigin(origins = "*")
@@ -19,7 +22,7 @@ public class CompetenceController {
         this.competenceService = competenceService;
     }
 
-
+    @Operation(summary = "Create a competence")
     @PostMapping
     public ResponseEntity<CompetenceDTO> createCompetence(@RequestBody CompetenceDTO competenceDTO) {
         CompetenceDTO created = competenceService.createCompetence(competenceDTO);
